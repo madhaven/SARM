@@ -1,0 +1,57 @@
+:root{
+    --colbg:#e0e0e0;
+    --colinputfocus:#1f1f1f;
+    --colinputhover:#999;
+    --coltop:white;
+    --colshadow:rgba(0,0,0,0.5)
+}
+*{
+    transition:0.5s ease-out;
+}
+.maindiv{
+    width:100vw;
+    height:100vh;
+    background-color: var(--colbg);
+    position:fixed;
+    z-index: -10;
+    transition:none;
+}
+.shad{
+    box-shadow:0 0 8px 1px var(--colshadow);
+}
+.maindiv>.container{
+    width:100%;
+    height:100%;
+}
+.signinpanel{
+    position:relative;
+    left:50%;
+    transform:translate(-50%, 25%);
+    padding:50px;
+    background-color:var(--coltop);
+    border-radius:10px;
+    transition: 0.5s ease-out;
+}
+.signinheadmarg{
+    margin-bottom:1.5em;
+}
+input{
+    text-align: center;
+}
+.form-control:hover{
+    border:1px solid var(--colinputhover);
+}
+.form-control:focus, .form-control:active{
+    border-width:1px;
+}
+.form-control:focus, .form-control:active{
+    border: 1px solid var(--colinputfocus);
+    box-shadow:none;
+}
+.head{
+    position:sticky;
+    top:0;
+    width:100%;
+    height:3em;
+/*    background-color:var(--coltop);*/
+}
