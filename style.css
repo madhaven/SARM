@@ -16,17 +16,19 @@
     z-index: -10;
     transition:none;
 }
+.homemain{
+    padding-top:2em
+}
 .shad{
     box-shadow:0 0 8px 1px var(--colshadow);
 }
 .maindiv>.container{
     width:100%;
-    height:100%;
 }
 .signinpanel{
     position:relative;
     left:50%;
-    transform:translate(-50%, 25%);
+    transform:translate(-50%, calc(50vh - 50%));
     padding:50px;
     background-color:var(--coltop);
     border-radius:10px;
@@ -35,23 +37,39 @@
 .signinheadmarg{
     margin-bottom:1.5em;
 }
-input{
-    text-align: center;
-}
 .form-control:hover{
     border:1px solid var(--colinputhover);
 }
 .form-control:focus, .form-control:active{
     border-width:1px;
 }
-.form-control:focus, .form-control:active{
+.form-control:focus, .form-control:active, input[type=submit]:hover{
     border: 1px solid var(--colinputfocus);
     box-shadow:none;
+    color: var(--colinputfocus);
+}
+input{
+    text-align: center;
+    color: var(--colinputfocus);
+    font-weight: 800;
 }
 .head{
     position:sticky;
     top:0;
     width:100%;
     height:3em;
-/*    background-color:var(--coltop);*/
+    background-color:var(--coltop);
+}
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-gap:1em;
+    grid-auto-rows: minmax(100px, auto);
+}
+.gridbox{
+    background-color: var(--coltop);
+    border:1px solid black;
+    border-radius:10px;
+}
+.gridbox:nth-child(1){
 }
