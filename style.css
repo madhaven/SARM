@@ -5,6 +5,28 @@
     --coltop:white;
     --colshadow:rgba(0,0,0,0.5)
 }
+/* width */
+::-webkit-scrollbar {
+    width:10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--colbg);
+    padding:5px;
+    margin:5px;
+    border:1px solid var(--colinputhover);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--colinputhover);
+}
+
 *{
     transition:0.5s ease-out;
 }
@@ -13,14 +35,16 @@ a:hover{
 }
 .maindiv{
     width:100vw;
-    height:100vh;
+    height:100%;
+    min-height: 100vh;
     background-color: var(--colbg);
     position:fixed;
     z-index: -10;
     transition:none;
+    overflow: auto;
 }
 .homemain{
-    padding-top:2em
+    padding-top:2em;
 }
 .shad{
     box-shadow:0 0 8px 1px var(--colshadow);
@@ -74,11 +98,11 @@ input{
 }
 .grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    grid-gap:1.5em;
+    grid-gap:1em;
     grid-auto-rows: minmax(2em, auto);
 }
 .gridbox{
+    float:left;
     background-color: var(--coltop);
     /* border:1px solid black; */
     background-position: center;
@@ -113,4 +137,7 @@ input{
 }
 h3{
   margin-top:1em;
+}
+tr{
+    cursor: pointer;
 }
