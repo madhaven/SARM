@@ -6,6 +6,21 @@
     <title>SARM | Sign In</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="source\style.css">
+    <script src="source\validate.js"></script>
+    <script>
+        var greenlight=[0,0]
+        function islightgreen(){
+            console.log(greenlight);
+            if (greenlight[0]+greenlight[1]==2){
+                document.getElementsByClassName('validate')[].getElementsByTagName("input")[0].disabled=false;
+            } else {
+                document.getElementsByClassName('validate')[].getElementsByTagName("input")[0].disabled=true;
+            }
+        }
+        function valusername(){
+            return false;
+        }
+    </script>
 </head>
 <body>
     <div class="maindiv">

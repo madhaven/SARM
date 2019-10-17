@@ -8,7 +8,59 @@
     <link rel="stylesheet" href="source\style.css">
     <script src="source\validate.js"></script>
     <script>
-
+    greenlight=[0,0,0,0];
+    function islightgreen(){
+        console.log(greenlight);
+        if (greenlight[0]+greenlight[1]+greenlight[2]+greenlight[3]==4){
+            document.getElementsByClassName('validate')[4].getElementsByTagName("input")[0].disabled=false;
+        } else {
+            document.getElementsByClassName('validate')[4].getElementsByTagName("input")[0].disabled=true;
+        }
+    }
+    function valEmail(){
+        email=document.getElementsByClassName("validate")[0].getElementsByTagName("input")[0].value;
+        if (checkEmail(email)){
+            // console.log(`${email} is okay`);
+            greenlight[0]=1;
+            document.getElementsByClassName("validate")[0].classList.remove("val-true");
+        } else {
+            // console.log(`${email} is not okay`);
+            greenlight[0]=0;
+            document.getElementsByClassName("validate")[0].classList.add("val-true");
+        }
+        islightgreen();
+    }
+    function valUsername(){
+        greenlight[1]=1;
+        islightgreen();
+    }
+    function valPass(){
+        pass=document.getElementsByClassName("validate")[2].getElementsByTagName("input")[0].value;
+        if (checkPassword(pass)){
+            // console.log(`${pass} is okay`);
+            greenlight[2]=1;
+            document.getElementsByClassName("validate")[2].classList.remove("val-true");
+        } else {
+            // console.log(`${pass} is okay`);
+            greenlight[2]=0;
+            document.getElementsByClassName("validate")[2].classList.add("val-true");
+        }
+        islightgreen();
+    }
+    function valConfirm(){
+        pass = document.getElementsByClassName("validate")[2].getElementsByTagName("input")[0].value;
+        pass2 = document.getElementsByClassName("validate")[3].getElementsByTagName("input")[0].value;
+        if (pass==pass2){
+            // console.log(`${pass2} is okay`);
+            greenlight[3]=1;
+            document.getElementsByClassName("validate")[3].classList.remove("val-true");
+        } else {
+            // console.log(`${pass2} is okay`);
+            greenlight[3]=0;
+            document.getElementsByClassName("validate")[3].classList.add("val-true");
+        }
+        islightgreen();
+    }
     </script>
 </head>
 <body>
@@ -18,11 +70,11 @@
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign Up</h3>
                     <form action="signin.html" method="post">
-                        <div class="form-group validate"><input type="email" class="form-control" placeholder="Email address" oninput="valEmail(this.value);"></div>
-                        <div class="form-group validate"><input type="text" class="form-control" placeholder="Username"></div>
-                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Password"></div>
-                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Confirm Password"></div>
-                        <div class="form-group validate"><input type="submit" class="form-control"></div>
+                        <div class="form-group validate"><input type="email" class="form-control" placeholder="Email address" oninput="valEmail();"></div>
+                        <div class="form-group validate"><input type="text" class="form-control" placeholder="Username" oninput=valUsername();></div>
+                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Password" oninput="valPass();"></div>
+                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Confirm Password" oninput="valConfirm();"></div>
+                        <div class="form-group validate"><input type="submit" class="form-control" disabled></div>
                     </form>
                 </div>
             </center>
