@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="author" content="Jitin J Gigi">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SARM | Supply</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="source\style.css">
+</head>
+<body>
+  <div class="maindiv">
+    <div class="container col-xl-6">
+      <center>
+        <div class="signinpanel shad">
+          <h3 class="signinheadmarg">Request Items You Need</h3>
+          <form action="home.html" method="post">
+            <div class="form-group"><input type="text" placeholder="Item Name" class="form-control"></div>
+            <div class="form-group"><input type="text"placeholder="Search Tags eg: medicine health food" class="form-control"></div>
+            <div class="form-group">
+              <label for="time">Expires on</label>
+              <input type="datetime-local"name="time" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="number"min="0"placeholder="Number" class="form-group form-control col-sm-6 left">
+              <select name="unit"placeholder="Unit" class="form-group form-control col-sm-6 left">
+                <option value="kg">KG</option>
+                <option value="l">Litre</option>
+                <option value="m">Metre</option>
+                <option value="u">Unit</option>
+                <option value="person">Person</option>
+              </select>
+            </div>
+            <div class="form-group"><input type="submit"value="Submit" class="form-control"></div>
+          </form>
+        </div>
+      </center>
+    </div>
+  </div>
+</body>
+</html>
