@@ -151,3 +151,13 @@ tr{
   border: 1px solid #343a40;
   border-radius:10px;
 }
+.val-true::before{
+  display:block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  content:"";
+  background-color:red;
+  position:absolute;
+  right:8%;
+}

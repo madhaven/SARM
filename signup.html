@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="source\style.css">
     <script src="source\validate.js"></script>
+    <script>
+
+    </script>
 </head>
 <body>
     <div class="maindiv">
@@ -15,11 +18,11 @@
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign Up</h3>
                     <form action="signin.html" method="post">
-                        <input type="email" class="form-control form-group" placeholder="Email address">
-                        <input type="text" class="form-control form-group" placeholder="Username">
-                        <input type="password" class="form-control form-group" placeholder="Password">
-                        <input type="password" class="form-control form-group" placeholder="Confirm Password">
-                        <input type="submit" class="form-control form-group">
+                        <div class="form-group validate"><input type="email" class="form-control" placeholder="Email address" oninput="valEmail(this.value);"></div>
+                        <div class="form-group validate"><input type="text" class="form-control" placeholder="Username"></div>
+                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Password"></div>
+                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Confirm Password"></div>
+                        <div class="form-group validate"><input type="submit" class="form-control"></div>
                     </form>
                 </div>
             </center>

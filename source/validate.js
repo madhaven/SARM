@@ -1,4 +1,4 @@
-function validateEmail(text){
-  console.log("WORKING");
-  return text.match('/^[0-9a-zA-Z_]+@[0-9a-zA-Z].[a-zA-Z]{3}$/');
+function checkEmail(text){
+  // console.log("WORKING");
+  return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text))
 }
