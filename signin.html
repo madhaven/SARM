@@ -9,16 +9,33 @@
     <script src="source\validate.js"></script>
     <script>
         var greenlight=[0,0]
+        count=0
         function islightgreen(){
             console.log(greenlight);
             if (greenlight[0]+greenlight[1]==2){
-                document.getElementsByClassName('validate')[].getElementsByTagName("input")[0].disabled=false;
+                document.getElementsByClassName('validate')[2].getElementsByTagName("input")[0].disabled=false;
+                console.log("enabled"+count++);
             } else {
-                document.getElementsByClassName('validate')[].getElementsByTagName("input")[0].disabled=true;
+                document.getElementsByClassName('validate')[2].getElementsByTagName("input")[0].disabled=true;
+                console.log("disabled"+count++);
             }
         }
-        function valusername(){
-            return false;
+        function valusername(){ //requires AJAX
+            greenlight[0]=1;
+            islightgreen();
+        }
+        function valpassword(){
+            pass=document.getElementsByClassName("validate")[1].getElementsByTagName("input")[0].value;
+            if (checkPassword(pass)){
+                // console.log(`${pass} is okay`);
+                greenlight[1]=1;
+                document.getElementsByClassName("validate")[1].classList.remove("val-true");
+            } else {
+                // console.log(`${pass} is okay`);
+                greenlight[1]=0;
+                document.getElementsByClassName("validate")[1].classList.add("val-true");
+            }
+            islightgreen();
         }
     </script>
 </head>
@@ -29,9 +46,9 @@
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign In</h3>
                     <form action="home.html" method="get">
-                        <input type="text" placeholder="Username" class="form-control form-group">
-                        <input type="password" placeholder="Password" class="form-control form-group">
-                        <input type="submit" value="Sign In" class="form-control form-group but">
+                        <div class="validate form-group"><input type="text" placeholder="Username" class="form-control" oninput="valusername();"></div>
+                        <div class="validate form-group"><input type="password" placeholder="Password" class="form-control" oninput="valpassword();"></div>
+                        <div class="validate form-group"><input type="submit" value="Sign In" class="form-control but" disabled></div>
                     </form>
                 </div>
             </center>

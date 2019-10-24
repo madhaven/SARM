@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="author" content="Jitin J Gigi">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>SARM | Supply</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="source\style.css">
+    <meta name="author" content="Jitin J Gigi">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SARM | Require</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="source\style.css">
+    <script>
+        var results=0;
+        function fill(text){
+            var r=0;
+            for (var x=0; x<text.length; x++){
+                if (text[x]==' '){
+                    r+=1;
+                    if (r>results){
+                        document.getElementsByClassName("searchresult")[0].getElementsByTagName("div")[0].innerHTML+=`                <div class="result">
+                    <h5>Item Found</h5>
+                    <p>Details Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita libero adipisci vitae ducimus iste facilis provident nam sit,     accusamus minus!</p>
+                    <a href="">Contact Me</a>
+                </div>`;
+                        results+=1;
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-  <div class="maindiv">
-    <div class="container col-xl-6">
-      <center>
-        <div class="signinpanel shad">
-          <h3 class="signinheadmarg">Request Items You Need</h3>
-          <form action="home.html" method="post">
-            <div class="form-group"><input type="text" placeholder="Item Name" class="form-control"></div>
-            <div class="form-group"><input type="text"placeholder="Search Tags eg: medicine health food" class="form-control"></div>
-            <div class="form-group">
-              <label for="time">Expires on</label>
-              <input type="datetime-local"name="time" class="form-control">
+    <div class="maindiv row">
+        <header class="head shad">
+        <div class="container">
+            <div class="col-sm-6">
+                <a href="profile.html" class="right">Profile <div class="headdp"><img src="source\dp.jpg" class="responsive"></div></a>
+                <a href="signin.html" class="right">Signout</a>
             </div>
-            <div class="form-group">
-              <input type="number"min="0"placeholder="Number" class="form-group form-control col-sm-6 left">
-              <select name="unit"placeholder="Unit" class="form-group form-control col-sm-6 left">
-                <option value="kg">KG</option>
-                <option value="l">Litre</option>
-                <option value="m">Metre</option>
-                <option value="u">Unit</option>
-                <option value="person">Person</option>
-              </select>
+            <div class="col-sm-6">
+                <a href="home.html" class="left">S.A.R.M</a> 
             </div>
-            <div class="form-group"><input type="submit"value="Submit" class="form-control"></div>
-          </form>
         </div>
-      </center>
+    </header>
+        <main class="searchpanel col-sm-6 col-md-4 homemain">
+            <div class="searchcontainer container">
+                <h3 class="signinheadmarg">Request Items You Need</h3>
+                <form action="home.html" method="post">
+                    <div class="form-group"><textarea placeholder="Search for tags. This helps finding your request eg: medicine health food expiry" class="form-control" oninput="fill(this.value);"></textarea></div>
+                    <hr>
+                    <div class="form-group"><input type="text" placeholder="Item Name" class="form-control"></div>
+                    <div class="form-group">
+                        <input type="number"min="0"placeholder="Number" class="form-group form-control col-sm-6 left">
+                        <input list="units" name="unit"placeholder="Unit" class="form-group form-control col-sm-6 left">
+                        <datalist id="units">
+                            <option value="kg">KG</option>
+                            <option value="l">Litre</option>
+                            <option value="m">Metre</option>
+                            <option value="u">Unit</option>
+                            <option value="person">Person</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group"><input type="text" placeholder="Location Required At" class="form-control"></div>
+                    <div class="form-group">
+                        <label for="time">Expires on</label>
+                        <input type="datetime-local"name="time" class="form-control">
+                    </div>
+                    <div class="form-group"><input type="submit"value="Place A Request" class="form-control"></div>
+                </form>
+            </div>
+        </main>
+        <aside class="searchresult col-sm-6 col-md-8 homemain">
+            <div class="container">
+
+            </div>
+        </aside>
     </div>
-  </div>
 </body>
 </html>
