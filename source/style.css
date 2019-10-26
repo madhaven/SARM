@@ -74,7 +74,9 @@ a:hover{
 .searchpanel{
     top:0px;
     margin-top:0px;
-    height:100vh;
+    padding-top:2em;
+    min-height:100vh;
+    height:100%;
     overflow:scroll;
     background-color:var(--coltop);
     box-shadow:2px 0 8px 1px var(--colshadow);
@@ -82,9 +84,15 @@ a:hover{
 }
 .searchcontainer{
     position: relative;
+/*
     top:50%;
-    text-align:center;
     transform:translateY(calc(-50%));
+*/
+    padding-top:3em;
+    padding-bottom:3em;
+    display:block;
+    align-items: center;
+    text-align:center;
 }
 .searchresult{
     display:inline-flex;
@@ -160,22 +168,23 @@ header.head a{
     /* border:1px solid black; */
     background-position: center;
     background-size: cover;
+    background-repeat:no-repeat;
     filter:grayscale(0.7);
     border-radius:10px;
     transition: 0.5s ease-out;
     cursor:pointer;
     padding:1.5em 1.5em;
 }
-.gridbox:hover{
-  transition: 0.15s ease-out;
-  box-shadow: 0 5px 10px 0 var(--colshadow);
-  filter: grayscale(0.3);
-}
 .gridbox:nth-child(1){
   background-image:url("dan-gold-aJN-jjFLyCU-unsplash.jpg");
 }
 .gridbox:nth-child(2){
   background-image:url("rui-silvestre-ul-ZsFLIjvw-unsplash.jpg");
+}
+.gridbox:hover{
+  transition: 0.15s ease-out;
+  box-shadow: 0 5px 10px 0 var(--colshadow);
+  filter: grayscale(0.3);
 }
 .gridbox>div{
   height:100%;
@@ -205,6 +214,7 @@ tr{
     border-bottom: 1px solid var(--colinputfocus) !important;
     z-index:20;
 }
+/*
 .val-true::before{
   display:block;
   width:8px;
@@ -214,6 +224,10 @@ tr{
   background-color:red;
   position:absolute;
   right:8%;
+}
+*/
+.val-true{
+    border-color:red!important;
 }
 .profilepagedp{
     width: 25vh;

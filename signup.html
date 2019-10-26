@@ -4,60 +4,80 @@
     <meta charset="UTF-8">
     <meta name="author" content="Jitin J Gigi">
     <title>SARM | Sign Up</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="source\style.css">
+    <link rel="stylesheet" href="source/bootstrapmin.css">
+    <link rel="stylesheet" href="source/style.css">
     <script src="source\validate.js"></script>
     <script>
-    greenlight=[0,0,0,0];
+    greenlight=[0,0,0,0,0];
+    greenlight={
+        email:0,
+        phone:0,
+        username:0,
+        password:0,
+        confirm:0
+    }
     function islightgreen(){
         console.log(greenlight);
-        if (greenlight[0]+greenlight[1]+greenlight[2]+greenlight[3]==4){
-            document.getElementsByClassName('validate')[4].getElementsByTagName("input")[0].disabled=false;
+        if (greenlight.email+greenlight.phone+greenlight.username+greenlight.password+greenlight.confirm==5){
+            document.getElementById("submit").disabled=false;
         } else {
-            document.getElementsByClassName('validate')[4].getElementsByTagName("input")[0].disabled=true;
+            document.getElementById("submit").disabled=true;
         }
     }
-    function valEmail(){
-        email=document.getElementsByClassName("validate")[0].getElementsByTagName("input")[0].value;
+    function valEmail(element){
+        email=element.value;
+        console.log(element);
         if (checkEmail(email)){
             // console.log(`${email} is okay`);
-            greenlight[0]=1;
-            document.getElementsByClassName("validate")[0].classList.remove("val-true");
+            greenlight.email=1;
+            element.classList.remove("val-true");
         } else {
             // console.log(`${email} is not okay`);
-            greenlight[0]=0;
-            document.getElementsByClassName("validate")[0].classList.add("val-true");
+            greenlight.email=0;
+            element.classList.add("val-true");
         }
         islightgreen();
     }
-    function valUsername(){ //requires AJAX
-        greenlight[1]=1;
+    function valUsername(element){ //requires AJAX
+        greenlight.username=1;
         islightgreen();
     }
-    function valPass(){
-        pass=document.getElementsByClassName("validate")[2].getElementsByTagName("input")[0].value;
+    function valPass(element){
+        pass=element.value;
         if (checkPassword(pass)){
             // console.log(`${pass} is okay`);
-            greenlight[2]=1;
-            document.getElementsByClassName("validate")[2].classList.remove("val-true");
+            greenlight.password=1;
+            element.classList.remove("val-true");
         } else {
             // console.log(`${pass} is okay`);
-            greenlight[2]=0;
-            document.getElementsByClassName("validate")[2].classList.add("val-true");
+            greenlight.password=0;
+            element.classList.add("val-true");
         }
         islightgreen();
     }
-    function valConfirm(){
-        pass = document.getElementsByClassName("validate")[2].getElementsByTagName("input")[0].value;
-        pass2 = document.getElementsByClassName("validate")[3].getElementsByTagName("input")[0].value;
+    function valConfirm(element){
+        pass = document.getElementsByClassName("validate")[3].value;
+        pass2 = document.getElementsByClassName("validate")[4].value;
         if (pass==pass2){
             // console.log(`${pass2} is okay`);
-            greenlight[3]=1;
-            document.getElementsByClassName("validate")[3].classList.remove("val-true");
+            greenlight.confirm=1;
+            element.classList.remove("val-true");
         } else {
             // console.log(`${pass2} is okay`);
-            greenlight[3]=0;
-            document.getElementsByClassName("validate")[3].classList.add("val-true");
+            greenlight.confirm=0;
+            element.classList.add("val-true");
+        }
+        islightgreen();
+    }
+    function valPhone(element){
+        console.log(element.value);
+        console.log("valphone");
+        if (checkPhone(element.value)){
+            greenlight.phone=1;
+            element.classList.remove("val-true");
+        } else {
+            greenlight.phone=0;
+            element.classList.add("val-true");
         }
         islightgreen();
     }
@@ -70,11 +90,12 @@
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign Up</h3>
                     <form action="signin.html" method="post">
-                        <div class="form-group validate"><input type="email" class="form-control" placeholder="Email address" oninput="valEmail();"></div>
-                        <div class="form-group validate"><input type="text" class="form-control" placeholder="Username" oninput=valUsername();></div>
-                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Password" oninput="valPass();"></div>
-                        <div class="form-group validate"><input type="password" class="form-control" placeholder="Confirm Password" oninput="valConfirm();"></div>
-                        <div class="form-group validate"><input type="submit" class="form-control" disabled></div>
+                        <div class="form-group"><input name="email" type="email" class="form-control validate" placeholder="Email address" oninput="valEmail(this);"></div>
+                        <div class="form-group"><input name="phone" type="number" min="1000000000" max="9999999999" class="form-control validate" placeholder="Contact Number" oninput="valPhone(this);"></div>
+                        <div class="form-group"><input name="username" type="text" class="form-control validate" placeholder="Username" oninput=valUsername(this);></div>
+                        <div class="form-group"><input name="password" type="password" class="form-control validate" placeholder="Password" oninput="valPass(this);"></div>
+                        <div class="form-group"><input type="password" class="form-control validate" placeholder="Confirm Password" oninput="valConfirm(this);"></div>
+                        <div class="form-group"><input type="submit" id="submit" class="form-control validate" disabled></div>
                     </form>
                 </div>
             </center>

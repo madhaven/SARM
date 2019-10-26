@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="author" content="Jitin J Gigi">
     <title>SARM | Sign In</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="source\style.css">
+    <link rel="stylesheet" href="source/bootstrapmin.css">
+    <link rel="stylesheet" href="source/style.css">
     <script src="source\validate.js"></script>
     <script>
         var greenlight=[0,0]
@@ -13,27 +13,27 @@
         function islightgreen(){
             console.log(greenlight);
             if (greenlight[0]+greenlight[1]==2){
-                document.getElementsByClassName('validate')[2].getElementsByTagName("input")[0].disabled=false;
+                document.getElementById("submit").disabled=false;
                 console.log("enabled"+count++);
             } else {
-                document.getElementsByClassName('validate')[2].getElementsByTagName("input")[0].disabled=true;
+                document.getElementById("submit").disabled=true;
                 console.log("disabled"+count++);
             }
         }
-        function valusername(){ //requires AJAX
+        function valusername(element){ //requires AJAX
             greenlight[0]=1;
             islightgreen();
         }
-        function valpassword(){
-            pass=document.getElementsByClassName("validate")[1].getElementsByTagName("input")[0].value;
+        function valpassword(element){
+            pass=element.value;
             if (checkPassword(pass)){
                 // console.log(`${pass} is okay`);
                 greenlight[1]=1;
-                document.getElementsByClassName("validate")[1].classList.remove("val-true");
+                element.classList.remove("val-true");
             } else {
                 // console.log(`${pass} is okay`);
                 greenlight[1]=0;
-                document.getElementsByClassName("validate")[1].classList.add("val-true");
+                element.classList.add("val-true");
             }
             islightgreen();
         }
@@ -46,9 +46,9 @@
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign In</h3>
                     <form action="home.html" method="get">
-                        <div class="validate form-group"><input type="text" placeholder="Username" class="form-control" oninput="valusername();"></div>
-                        <div class="validate form-group"><input type="password" placeholder="Password" class="form-control" oninput="valpassword();"></div>
-                        <div class="validate form-group"><input type="submit" value="Sign In" class="form-control but" disabled></div>
+                        <div class="form-group"><input type="text" placeholder="Username" class="form-control" oninput="valusername(this);"></div>
+                        <div class="form-group"><input type="password" placeholder="Password" class="form-control" oninput="valpassword(this);"></div>
+                        <div class="form-group"><input type="submit" id="submit" value="Sign In" class="form-control but" disabled></div>
                     </form>
                 </div>
             </center>
