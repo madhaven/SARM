@@ -1,18 +1,14 @@
 <?php
 if (isset($_POST['submit'])){
-    $email = $_POST['submit'];
+    $email = $_POST['email'];
     $phone = $_POST['phone'];
     $username = $_POST['username'];
     $password = $_POST['password'];
     require('serverdb.php');
-    $res1 = mysqli_query($con, "");
-    if ($res1){
-        $id = mysqli_insert_id($res1);
-        $res1 = mysqli_query($con, "");
-        if ($res2)
-            header('Location: signin.php');
-    }
+    mysqli_query($con, "insert into login(username, password) values('$username', '$password');") or die("Querying Error");
+    mysqli_query($con, "insert into user(username, email, phone, permissions) values ('$username', '$email', '$phone', 'user');") or die("Querying Error");
     mysqli_close($con);
+    header('Location: signin.php');
 }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -24,11 +20,10 @@ if (isset($_POST['submit'])){
     <link rel="stylesheet" href="source/style.css">
     <script src="source/validate.js"></script>
     <script>
-    greenlight=[0,0,0,0,0];
     greenlight={
-        email:0,
-        phone:0,
-        username:0,
+        email:<?php if (isset($email)) echo 1; else echo 0; ?>,
+        phone:<?php if (isset($phone)) echo 1; else echo 0; ?>,
+        username:<?php if (isset($username)) echo 1; else echo 0; ?>,
         password:0,
         confirm:0
     }
@@ -110,7 +105,7 @@ if (isset($_POST['submit'])){
             <center>
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign Up</h3>
-                    <form action="signingup.php" method="post">
+                    <form action="signup.php" method="post">
                         <div class="form-group"><input name="email" type="email" class="form-control validate" placeholder="Email address" oninput="valEmail();" id="email"></div>
                         <div class="form-group"><input name="phone" type="number" min="1000000000" max="9999999999" class="form-control validate" placeholder="Contact Number" oninput="valPhone();" id="phone"></div>
                         <div class="form-group"><input name="username" type="text" class="form-control validate" placeholder="Username" oninput="valUsername();" id="username"></div>

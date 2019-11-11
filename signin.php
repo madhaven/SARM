@@ -2,17 +2,17 @@
 if (isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $query = "select id from login where username='$username' and password='$password';";
+    $query = "select username from login where username='$username' and password='$password';";
     require "serverdb.php";
-    $res = mysqli_query($con, $query);
+    $res = mysqli_query($con, $query) or die("quie not working");
     if (mysqli_num_rows($res)==1){
-        mysqli_close($con);
         session_start();
         $row = mysqli_fetch_array($res);
-        $_SESSION['id'] = $row['id'];
+        $_SESSION['username'] = $row['username'];
+        mysqli_close($con);
         header('Location: home.php');
     } else {
-//        print_r(mysqli_query($con, $query));
+       die ($query);
         mysqli_close($con);
 //        print_r($_POST);
     }
