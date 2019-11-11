@@ -70,7 +70,7 @@ if (!isset($_POST['submit'])){
 </html>
 <?php
 } else {
-    $uid = $_SESSION['id']
+    $uid = $_SESSION['id'];
     $tags = $_POST['tags'];
     $name = $_POST['name'];
     $details = $_POST['details'];
