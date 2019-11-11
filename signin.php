@@ -2,13 +2,14 @@
 if (isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $query = "select username from login where username='$username' and password='$password';";
-    require "serverdb.php";
+    $query = "select id, username from login where username='$username' and password='$password';";
+    require("serverdb.php");
     $res = mysqli_query($con, $query) or die("quie not working");
     if (mysqli_num_rows($res)==1){
         session_start();
         $row = mysqli_fetch_array($res);
         $_SESSION['username'] = $row['username'];
+        $_SESSION['id'] = $row['id'];
         mysqli_close($con);
         header('Location: home.php');
     } else {

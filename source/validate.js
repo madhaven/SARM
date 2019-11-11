@@ -42,6 +42,9 @@ function valtags(element){
         lights.tags=0;
         element.classList.add("val-true");
     }
+    if (element.value.length>500){
+        element.value = element.value.pop();
+    }
     checklights();
 }
 function valname(element){

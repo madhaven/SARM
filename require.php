@@ -34,8 +34,8 @@ require ('checksession.php');
         <main class="searchpanel col-sm-6 col-md-4 homemain">
             <div class="searchcontainer container">
                 <h4 class="signinheadmarg">Request Items You Need</h4>
-                <form action="home.html" method="post">
-                    <div class="form-group"><textarea placeholder="Search for tags. This helps finding your request eg: medicine health food expiry" class="form-control" name="tags" oninput="valtags(this);fill(this.value);"></textarea></div>
+                <form action="require.php" method="post">
+                    <div class="form-group"><textarea placeholder="Search for tags. This helps finding your request eg: medicine health food expiry" class="form-control" name="tags" oninput="valtags(this);fill(this.value);" maxlength="500"></textarea></div>
                     <hr>
                     <div class="form-group"><input type="text" placeholder="Item Name" class="form-control" name="name" id="name" oninput="valname(this);"></div>
                     <div class="form-group"><textarea name="details" placeholder="Add some details" oninput="valdetails(this);" class="form-control"></textarea></div>
