@@ -29,7 +29,7 @@ function signin($username, $password){
 }
 function deletesession(){
     session_start();
-    if (isset($_SESSION['usernmae'])){
+    if (isset($_SESSION['username'])){
         //$_SESSION['id'] = NULL;
         //$_SESSION['username'] = NULL;
         unset($_SESSION['id']);
