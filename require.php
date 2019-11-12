@@ -1,5 +1,7 @@
 <?php
-require ('checksession.php');
+require ('tables.php');
+checksession();
+if (!isset($_POST['submit'])){
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +39,7 @@ require ('checksession.php');
                 <form action="require.php" method="post">
                     <div class="form-group"><textarea placeholder="Search for tags. This helps finding your request eg: medicine health food expiry" class="form-control" name="tags" oninput="valtags(this);fill(this.value);" maxlength="500"></textarea></div>
                     <hr>
-                    <div class="form-group"><input type="text" placeholder="Item Name" class="form-control" name="name" id="name" oninput="valname(this);"></div>
+                    <div class="form-group"><input type="text" placeholder="Item Name" class="form-control" name="name" oninput="valname(this);"></div>
                     <div class="form-group"><textarea name="details" placeholder="Add some details" oninput="valdetails(this);" class="form-control"></textarea></div>
                     <div class="form-group">
                         <input type="number" min="0" placeholder="Number" class="form-group form-control col-sm-6 left" name="number" oninput="valnumber(this);">
@@ -50,21 +52,34 @@ require ('checksession.php');
                             <option value="person">Person</option>
                         </datalist>
                     </div>
-                    <div class="form-group"><input type="text" placeholder="Location Required At" class="form-control"></div>
+                    <div class="form-group"><input type="text" name="location" placeholder="Location Required At" class="form-control"></div>
                     <div class="form-group">
                         <label for="time">Expires on</label>
-                        <input type="datetime-local"name="time" class="form-control">
+                        <input type="datetime-local" name="time" class="form-control">
                     </div>
-                    <div class="form-group"><input name="submit" id="submit" type="submit"value="Place A Request" class="form-control" disabled></div>
+                    <div class="form-group"><input name="submit" id="submit" type="submit" value="Place A Request" class="form-control" disabled></div>
                 </form>
             </div>
         </main>
         <aside class="searchresult col-sm-6 col-md-8 homemain">
             <div class="container">
-
             </div>
         </aside>
 <?php require("header.php"); ?>
     </div>
 </body>
 </html>
+<?php
+} else {
+    $uid = $_SESSION['id'];
+    $tags = $_POST['tags'];
+    $name = $_POST['name'];
+    $details = $_POST['details'];
+    $number = $_POST['number'];
+    $units = $_POST['units'];
+    if (isset($_POST['location'])) $loc = $_POST['location']; else $loc=NULL;
+    $expiry = $_POST['time'];
+    (new reequire($uid, $tags, $name, $details, $number, $units, $loc, $expiry, 1))->insertindb();
+    header('Location:home.php#require');
+}
+?>

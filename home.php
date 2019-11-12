@@ -1,5 +1,6 @@
 <?php 
-require('checksession.php');
+require('tables.php');
+checksession();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@ require('checksession.php');
             <div class="gridbox col-sm-12" onclick="window.location='require.php';"><div>Require</div></div>
         </div>
         <div class='container'>
-          <h3>Items ready to ship</h3>
+          <h3 id="supply">Items ready to ship</h3>
           <table class='table table-striped table-hover'>
             <thead class="thead-dark">
               <th>Good</th>
@@ -33,7 +34,7 @@ require('checksession.php');
               <tr><td>Mobile Recharge</td><td>10</td><td>Mobiles</td></tr>
             </tbody>
           </table>
-          <h3>Items Requested for</h3>
+          <h3 id="require">Items Requested for</h3>
           <table class='table table-striped table-hover table2'>
             <thead class="thead-dark">
               <th>Good</th>

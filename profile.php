@@ -1,5 +1,6 @@
 <?php
-require('checksession.php');
+require('tables.php');
+checksession();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

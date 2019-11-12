@@ -1,5 +1,6 @@
 <?php
-require('checksession.php');
+require('tables.php');
+checksession();
 if (!isset($_POST['submit'])){
 ?><!DOCTYPE html>
 <html lang="en">
@@ -76,8 +77,9 @@ if (!isset($_POST['submit'])){
     $details = $_POST['details'];
     $number = $_POST['number'];
     $units = $_POST['units'];
-    if (isset($_POST['location'])) $loc = $_POST['location'];
+    if (isset($_POST['location'])) $loc = $_POST['location']; else $loc=NULL;
     $expiry = $_POST['time'];
-    
+    (new supply($uid, $tags, $name, $details, $number, $units, $loc, $expiry, 1))->insertindb();
+    header('Location:home.php#supply');
 }
 ?>

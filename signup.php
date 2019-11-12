@@ -1,13 +1,12 @@
 <?php
+require('tables.php');
+deletesession();
 if (isset($_POST['submit'])){
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    require('serverdb.php');
-    mysqli_query($con, "insert into login(username, password) values('$username', '$password');") or die("Querying Error");
-    mysqli_query($con, "insert into user(username, email, phone, permissions) values ('$username', '$email', '$phone', 'user');") or die("Querying Error");
-    mysqli_close($con);
+    (new user($email, $phone, $username, 0))->insertindb($password);
     header('Location: signin.php');
 }
 ?><!DOCTYPE html>
