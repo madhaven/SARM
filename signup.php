@@ -112,6 +112,7 @@ if (isset($_POST['submit'])){
                         <div class="form-group"><input type="password" class="form-control validate" placeholder="Confirm Password" oninput="valConfirm();" id="pass2"></div>
                         <div class="form-group"><input name="submit" type="submit" id="submit" class="form-control validate" disabled></div>
                     </form>
+                    <p>Already registered on S.A.R.M ?<br><a href="signin.php">Sign in Here</a></p>
                 </div>
             </center>
         </div>
