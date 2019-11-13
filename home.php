@@ -18,22 +18,35 @@ checksession();
             <div class="gridbox col-sm-12" onclick="window.location='require.php';"><div>Require</div></div>
         </div>
         <div class='container'>
+<?php
+$rows = (new userwithid($_SESSION['id']))->selectsupplyrows();
+if ($rows){
+?>
+         <div class="col-md-6" style="float:left;">
           <h3 id="supply">Items ready to ship</h3>
           <table class='table table-striped table-hover'>
             <thead class="thead-dark">
-              <th>Good</th>
+              <th>Item</th>
               <th>Quantity</th>
               <th>Unit</th>
             </thead>
             <tbody>
-              <tr><td>Wood</td><td>50</td><td>kg</td></tr>
-              <tr><td>Food</td><td>1000</td><td>People</td></tr>
-              <tr><td>Mobile Recharge</td><td>10</td><td>Mobiles</td></tr>
-              <tr><td>Wood</td><td>50</td><td>kg</td></tr>
-              <tr><td>Food</td><td>1000</td><td>People</td></tr>
-              <tr><td>Mobile Recharge</td><td>10</td><td>Mobiles</td></tr>
+<?php   foreach($rows as $x){ ?>
+                <tr>
+                    <td><?php echo $x->name; ?></td>
+                    <td><?php echo $x->number; ?></td>
+                    <td><?php echo $x->units; ?></td>
+                </tr>
+<?php   } ?>
             </tbody>
           </table>
+          </div>
+<?php
+}
+$rows = (new userwithid($_SESSION['id']))->selectrequirerows(true);
+if ($rows){
+?>
+         <div class="col-md-6" style="float:left;">
           <h3 id="require">Items Requested for</h3>
           <table class='table table-striped table-hover table2'>
             <thead class="thead-dark">
@@ -42,13 +55,17 @@ checksession();
               <th>Unit</th>
             </thead>
             <tbody>
-              <tr><td>Wood</td><td>50</td><td>kg</td></tr>
-              <tr><td>Food</td><td>1000</td><td>People</td></tr>
-              <tr><td>Wood</td><td>50</td><td>kg</td></tr>
-              <tr><td>Food</td><td>1000</td><td>People</td></tr>
-              <tr><td>Mobile Recharge</td><td>10</td><td>Mobiles</td></tr>
+<?php   foreach($rows as $x){ ?>
+                <tr>
+                    <td><?php echo $x->name; ?></td>
+                    <td><?php echo $x->number; ?></td>
+                    <td><?php echo $x->units; ?></td>
+                </tr>
+<?php   } ?>
             </tbody>
           </table>
+          </div>
+<?php } ?>
         </div>
     </div>
 </body>

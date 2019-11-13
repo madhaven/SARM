@@ -43,21 +43,6 @@ function checksession(){
         header('Location: signin.php');
     }
 }
-class user{
-    function __construct($email, $phone, $username, $permissions=0){
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->username = $username;
-        $this->permissions = $permissions;
-    }
-    function insertindb($password){
-        $con = connect();
-        mysqli_query($con, "insert into user(username, email, phone, permissions) values ('$this->username', '$this->email', '$this->phone', $this->permissions);") or die("Login error");
-        $this->id = mysqli_insert_id($con);
-        mysqli_query($con, "insert into login(uid, password) values('$this->id', '$password');") or die("Login Error");
-        mysqli_close($con);
-    }
-}
 class supply{
     function __construct($uid, $tags, $name, $details, $number, $units, $location='-', $expiry, $status=1){
         $this->uid = $uid;
@@ -77,11 +62,96 @@ class supply{
         mysqli_close($con);
     }
 }
+class supplywithid extends supply{
+    function __construct($id){
+        $con = connect();
+        $res = mysqli_query($con, "select * from `supply` where id = $id;") or die('unable to fetch Supply details');
+        mysqli_close($con);
+        $row = mysqli_fetch_array($res);
+        $this->uid = $row['uid'];
+        $this->tags = $row['tags'];
+        $this->name = $row['name'];
+        $this->details = $row['details'];
+        $this->number = $row['number'];
+        $this->units = $row['units'];
+        $this->location = $row['location'];
+        $this->expiry = $row['expiry'];
+        $this->status = $row['status'];
+    }
+}
 class reequire extends SUPPLY{
     function insertindb(){
         $con = connect();
         $query = "insert into `require`(uid, tags, name, details, number, units, location, expiry, status) values('$this->uid', '".addslashes($this->tags)."', '".addslashes($this->name)."', '".addslashes($this->details)."', $this->number, '$this->units', '".addslashes($this->location)."', '$this->expiry', $this->status);";
         mysqli_query($con, $query) or die($query);
+        mysqli_close($con);
+    }
+}
+class reequirewithid extends reequire{
+    function __construct($id){
+        $con = connect();
+        $res = mysqli_query($con, "select * from `require` where id = $id;") or die('unable to fetch Requirement details');
+        mysqli_close($con);
+        $row = mysqli_fetch_array($res);
+        $this->uid = $row['uid'];
+        $this->tags = $row['tags'];
+        $this->name = $row['name'];
+        $this->details = $row['details'];
+        $this->number = $row['number'];
+        $this->units = $row['units'];
+        $this->location = $row['location'];
+        $this->expiry = $row['expiry'];
+        $this->status = $row['status'];
+    }
+}
+class user{
+    function __construct($email, $phone, $username, $permissions=0){
+        $this->email = $email;
+        $this->phone = $phone;
+        $this->username = $username;
+        $this->permissions = $permissions;
+    }
+    function selectsupplyrows($req = false){
+        $con = connect();
+        if ($req)
+            $res = mysqli_query($con, "select id from `require` where uid = ${_SESSION['id']};") or die ("Unable to fetch reequire data");
+        else
+            $res = mysqli_query($con, "select id from `supply` where uid = ${_SESSION['id']};") or die ("Unable to fetch supply data");
+            
+        mysqli_close($con);
+        if (mysqli_num_rows($res)>0){
+            $arr = array();
+            while ($row = mysqli_fetch_array($res)){
+                if ($req)
+                    array_push($arr, new reequirewithid($row['id']));
+                else
+                    array_push($arr, new supplywithid($row['id']));
+            }
+            return $arr;
+        } else return false;
+    }
+    function selectrequirerows(){
+        return $this->selectsupplyrows(true);
+    }
+    function insertindb($password){
+        $con = connect();
+        mysqli_query($con, "insert into user(username, email, phone, permissions) values ('$this->username', '$this->email', '$this->phone', $this->permissions);") or die("Login error");
+        $this->id = mysqli_insert_id($con);
+        mysqli_query($con, "insert into login(uid, password) values('$this->id', '$password');") or die("Login Error");
+        mysqli_close($con);
+    }
+}
+class userwithid extends user{
+    function __construct($uid){
+        $con = connect();
+        $res = mysqli_query($con, "select * from user where id = $uid;") or die("Unable to fetch user data");
+        if (mysqli_num_rows($res)==1){
+            $row = mysqli_fetch_array($res);
+            $this->email = $row['email'];
+            $this->phone = $row['phone'];
+            $this->username = $row['username'];
+            $this->permissions = $row['permissions'];
+        } else die ("Fatal user collision");
         mysqli_close($con);
     }
 }

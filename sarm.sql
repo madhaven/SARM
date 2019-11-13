@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 10:46 PM
+-- Generation Time: Nov 13, 2019 at 06:34 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -38,9 +38,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`uid`, `password`) VALUES
-(1, 'jitinjitin'),
-(2, 'jeenajeena'),
-(3, 'jitinjeena');
+(1, 'jitinjitin');
 
 -- --------------------------------------------------------
 
@@ -66,7 +64,8 @@ CREATE TABLE `require` (
 --
 
 INSERT INTO `require` (`id`, `uid`, `tags`, `name`, `details`, `number`, `units`, `location`, `expiry`, `status`) VALUES
-(1, 1, 'food', 'Food', 'I\'m just hungry', 1, 'meal', 'my house', '0001-01-01 00:00:00', 1);
+(1, 1, 'some more shit', 'shit', 'it\'s really smelly', 2, 'piece', 'closet', '2019-11-15 00:32:00', 1),
+(2, 1, 'mangaa', 'mangappazhama', 'pazhuthath mathi', 1, 'kashnam', 'marathinte moottil', '2019-11-22 02:21:00', 1);
 
 -- --------------------------------------------------------
 
@@ -92,9 +91,7 @@ CREATE TABLE `supply` (
 --
 
 INSERT INTO `supply` (`id`, `uid`, `tags`, `name`, `details`, `number`, `units`, `location`, `expiry`, `status`) VALUES
-(1, 3, 'my ass', 'ASS', 'well it\'s mine and its an ass. ', 2, 'butts', 'below ass', '2919-04-02 02:03:00', 1),
-(2, 1, 'shit smelly', 'Holy Shit', 'well, it\'s generally found in the closets toilets and on the street in Tamil Nad', 2, 'Pieces', 'to my manure pit', '2999-02-12 00:00:00', 1),
-(3, 1, 'x', 'y', 'z', 2, 'i', 'f', '0008-08-01 21:03:00', 1);
+(1, 1, 'some shit', 'shit', 'it\'s smelly', 2, 'pieces', 'closet', '2019-11-13 14:03:00', 1);
 
 -- --------------------------------------------------------
 
@@ -115,9 +112,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `phone`, `username`, `permissions`) VALUES
-(1, 'jitinjg@gmail.com', '8943432729', 'jitin', 0),
-(2, 'jitinjg10@gmail.com', '8086741369', 'jeena', 0),
-(3, 'jitin@ymail.com', '2334455667', 'jitinjeena', 0);
+(1, 'jitinjg@gmail.com', '8943432840', 'jitin', 0);
 
 --
 -- Indexes for dumped tables
@@ -155,19 +150,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `require`
 --
 ALTER TABLE `require`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `supply`
 --
 ALTER TABLE `supply`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
