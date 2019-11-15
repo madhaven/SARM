@@ -6,7 +6,8 @@ if (isset($_POST['submit'])){
     $phone = $_POST['phone'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    (new user($email, $phone, $username, 0))->insertindb($password);
+    if ((new user($email, $phone, $username, 0))->insertindb($password))
+        $_POST['erroruser'] = true;
     header('Location: signin.php');
 }
 ?><!DOCTYPE html>
@@ -19,7 +20,7 @@ if (isset($_POST['submit'])){
     <link rel="stylesheet" href="source/style.css">
     <script src="source/validate.js"></script>
     <script>
-    greenlight={
+    var greenlight={
         email:<?php if (isset($email)) echo 1; else echo 0; ?>,
         phone:<?php if (isset($phone)) echo 1; else echo 0; ?>,
         username:<?php if (isset($username)) echo 1; else echo 0; ?>,
@@ -35,9 +36,9 @@ if (isset($_POST['submit'])){
         }
     }
     function valEmail(){
-        element = document.getElementById("email");
-        email=element.value;
-        console.log(element);
+        var element = document.getElementById("email");
+        var email=element.value;
+//        console.log(element);
         if (checkEmail(email)){
             // console.log(`${email} is okay`);
             greenlight.email=1;
@@ -50,43 +51,64 @@ if (isset($_POST['submit'])){
         islightgreen();
     }
     function valUsername(){ //requires AJAX
-        element = document.getElementById("username");
-        greenlight.username=1;
-        islightgreen();
+        var username = document.getElementById('username').value;
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                var uname = document.getElementById('username');
+                if (this.response == "TRUE"){
+                    uname.classList.add("val-true");
+                    uname.title = "Username already exists.";
+                    greenlight.username=0;
+                } else {
+                    uname.classList.remove("val-true");
+                    uname.title="";
+                    greenlight.username=1;
+                }
+                console.log("ehcking for logs");
+                islightgreen();
+            }
+        }
+        ajax.open("GET", "checkusers.php?username="+username, true);
+        ajax.send();
     }
     function valPass(){
-        element = document.getElementById("password");
-        pass=element.value;
+        var element = document.getElementById("password");
+        var pass=element.value;
         if (checkPassword(pass)){
-            // console.log(`${pass} is okay`);
+//            console.log(`${pass} is okay`);
             greenlight.password=1;
             element.classList.remove("val-true");
+            element.title = "";
         } else {
-            // console.log(`${pass} is okay`);
+//            console.log(`${pass} is okay`);
             greenlight.password=0;
             element.classList.add("val-true");
+            element.title = "This is an invalid password";
         }
         islightgreen();
     }
     function valConfirm(){
-        element = document.getElementById("pass2");
-        pass = document.getElementById("password").value;
-        pass2 = element.value;
+        var element = document.getElementById("pass2");
+        var pass = document.getElementById("password").value;
+        var pass2 = element.value;
         if (pass==pass2){
             // console.log(`${pass2} is okay`);
             greenlight.confirm=1;
             element.classList.remove("val-true");
+            element.title = "";
         } else {
             // console.log(`${pass2} is okay`);
             greenlight.confirm=0;
             element.classList.add("val-true");
+            element.title = "Passwords don't match.";
         }
         islightgreen();
     }
     function valPhone(){
-        element = document.getElementById('phone');
-        console.log(element.value);
-        console.log("valphone");
+        var element = document.getElementById('phone');
+//        console.log(element.value);
+//        console.log("valphone");
         if (checkPhone(element.value)){
             greenlight.phone=1;
             element.classList.remove("val-true");

@@ -16,6 +16,13 @@ if (!isset($_POST['submit'])){
     <script>
         var results=0;
         function fill(text){ //SUPPOSED TO BE AN AJAX FUNCTION
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    console.log(this);
+                }
+            }
+            ajax.open("getsupplies.php?")///////////////////////////////////////////////////////////////////////////////
             var r=text.split(" ").length;
             for (var x=0; x<(r-results); x++){
                 document.getElementsByClassName("searchresult")[0].getElementsByTagName("div")[0].innerHTML+=`                <div class="result">

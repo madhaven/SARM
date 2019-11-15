@@ -19,7 +19,7 @@ if (isset($_POST['submit'])){
     <script src="source\validate.js"></script>
     <script>
         var greenlight=[0,0];
-        count=0
+        count=0;
         function islightgreen(){
             console.log(greenlight);
             if (greenlight[0]+greenlight[1]==2){
@@ -30,9 +30,26 @@ if (isset($_POST['submit'])){
                 console.log("disabled"+count++);
             }
         }
-        function valusername(){ //requires AJAX
-            greenlight[0]=1;
-            islightgreen();
+        function valusername(){
+			var username = document.getElementById('username').value;
+			var ajax = new XMLHttpRequest();
+			ajax.onreadystatechange = function(){
+				if (this.readyState == 4 && this.status == 200){
+					var uname = document.getElementById('username');
+					if (this.response == "TRUE"){
+						uname.classList.remove("val-true");
+						uname.title="";
+						greenlight[0]=1;
+					} else {
+						uname.classList.add("val-true");
+						uname.title = "Username don't exist";
+						greenlight[0]=0;
+					}
+					islightgreen();
+				}
+			}
+			ajax.open("GET", "checkusers.php?username="+username, true);
+			ajax.send();
         }
         function valpassword(){
             element = document.getElementById('password');
@@ -57,7 +74,7 @@ if (isset($_POST['submit'])){
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign In</h3>
                     <form action="signin.php" method="post">
-                        <div class="form-group"><input type="text" name="username" id="username" placeholder="Username" class="form-control" onload="valusername(this);" oninput="valusername();" <?php if (isset($username)) echo "value=\"".$username."\";" ?> ></div>
+                        <div class="form-group"><input type="text" name="username" id="username" placeholder="Username" class="form-control" oninput="valusername();" <?php if (isset($username)) echo "value=\"".$username."\";" ?> ></div>
                         <div class="form-group"><input type="password" name="password" id="password" placeholder="Password" class="form-control" oninput="valpassword();"></div>
                         <div class="form-group"><input type="submit" name="submit" id="submit" value="Sign In" class="form-control but" disabled></div>
                     </form>

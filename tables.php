@@ -135,6 +135,8 @@ class user{
     }
     function insertindb($password){
         $con = connect();
+        if (mysqli_num_rows(mysqli_query($con, "select username from user where username = '$this->username';")))
+            return false;
         mysqli_query($con, "insert into user(username, email, phone, permissions) values ('$this->username', '$this->email', '$this->phone', $this->permissions);") or die("Login error");
         $this->id = mysqli_insert_id($con);
         mysqli_query($con, "insert into login(uid, password) values('$this->id', '$password');") or die("Login Error");
