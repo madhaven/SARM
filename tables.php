@@ -157,4 +157,18 @@ class userwithid extends user{
         mysqli_close($con);
     }
 }
+class userwithname extends user{
+    function __construct($username){
+        $con = connect();
+        $res = mysqli_query($con, "select * from user where username = '$username';") or die("Unable to fetch user data");
+        if (mysqli_num_rows($res)==1){
+            $row = mysqli_fetch_array($res);
+            $this->email = $row['email'];
+            $this->phone = $row['phone'];
+            $this->username = $row['username'];
+            $this->permissions = $row['permissions'];
+        } else die("Fatal user collision");
+        mysqli_close($con);
+    }
+}
 ?>

@@ -1,6 +1,10 @@
 <?php
 require('tables.php');
 checksession();
+if (isset($_GET['username']))
+    $user = new userwithname($_GET['username']);
+else
+    $user = new userwithid($_SESSION['id']);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +22,8 @@ checksession();
             <center>
                 <div class="signinpanel shad">
                     <div class="profilepagedp"><img src="source\dp.jpg" alt="Display Picture"></div>
-                    <h3>Username</h3>
-                    <p>PhoneNumber</p>
-                    <p>Location</p>
+                    <h3><?php echo $user->username; ?></h3>
+                    <p><?php echo $user->phone; ?></p>
                 </div>
             </center>
         </div>

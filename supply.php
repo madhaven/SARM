@@ -14,20 +14,23 @@ if (!isset($_POST['submit'])){
     <link rel="stylesheet" href="source/style.css">
     <script src="source/validate.js"></script>
     <script>
-        var results=0;
-        function fill(text){ //SUPPOSED TO BE AN AJAX FUNCTION
-            var r=text.split(" ").length;
-            for (var x=0; x<(r-results); x++){
-                document.getElementsByClassName("searchresult")[0].getElementsByTagName("div")[0].innerHTML+=`                <div class="result">
-                    <h5>${text.split(" ")[results-1]}</h5>
-                    <p>Details Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita libero adipisci vitae ducimus iste facilis provident nam sit,     accusamus minus!</p>
-                    <p>Amount and Units</p>
-                    <p>Location</p>
-                    <p>Expiry</p>
-                    <a href="">Contact Me</a>
-                </div>`;
+        function fill(element){
+            text = element.value;
+            if (/\n/.test(text))
+                if (text[text.length-2]!=' ') element.value = text = text.replace(/\n/, ' ');
+                else element.value = text = text.replace(/\n/, '');
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    console.log(text);
+                    console.log(this.responseText);
+                    document.getElementsByClassName("searchresult")[0].getElementsByTagName("div")[0].innerHTML = this.responseText;
+                }
             }
-            results=r;
+            if (text){
+                ajax.open("GET", "getsupplies.php?code=2&search="+encodeURIComponent(text), true);
+                ajax.send();
+            }
         }
     </script>
 </head>
@@ -37,7 +40,7 @@ if (!isset($_POST['submit'])){
             <div class="searchcontainer container">
                 <h4 class="signinheadmarg">Add Items You Could Supply</h4>
                 <form action="supply.php" method="post">
-                    <div class="form-group"><textarea placeholder="Add tags. This helps finding your supply eg: medicine health food expiry" class="form-control" name="tags" oninput="valtags(this);fill(this.value);" maxlength="500"></textarea></div>
+                    <div class="form-group"><textarea placeholder="Add tags. This helps finding your supply eg: medicine health food expiry" class="form-control" name="tags" oninput="fill(this);" maxlength="500"></textarea></div>
                     <hr>
                     <div class="form-group"><input type="text" placeholder="Item Name" class="form-control" name="name" oninput="valname(this);"></div>
                     <div class="form-group"><textarea name="details" placeholder="Add some details" oninput="valdetails(this);" class="form-control"></textarea></div>
