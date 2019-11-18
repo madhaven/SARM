@@ -105,11 +105,12 @@ class reequirewithid extends reequire{
     }
 }
 class user{
-    function __construct($email, $phone, $username, $permissions=0){
+    function __construct($email, $phone, $username, $dp='source/dp.jpg', $permissions=0){
         $this->email = $email;
         $this->phone = $phone;
         $this->username = $username;
         $this->permissions = $permissions;
+        $this->dp = $dp;
     }
     function selectsupplyrows($req = false){
         $con = connect();
@@ -137,10 +138,17 @@ class user{
         $con = connect();
         if (mysqli_num_rows(mysqli_query($con, "select username from user where username = '$this->username';")))
             return false;
-        mysqli_query($con, "insert into user(username, email, phone, permissions) values ('$this->username', '$this->email', '$this->phone', $this->permissions);") or die("Login error");
+        mysqli_query($con, "insert into user(username, email, phone, dp, permissions) values ('$this->username', '$this->email', '$this->phone', $this->dp, $this->permissions);") or die("Login error");
         $this->id = mysqli_insert_id($con);
         mysqli_query($con, "insert into login(uid, password) values('$this->id', '$password');") or die("Login Error");
         mysqli_close($con);
+        return true;
+    }
+    function updateas($newuser){
+        $con = connect();
+        $res = mysqli_query($con, "update user set username='$newuser->username', email='$newuser->email', phone=$newuser->phone, dp='$newuser->dp' where username='$this->username';") or die("Unable to Update");
+        mysqli_close($con);
+        return true;
     }
 }
 class userwithid extends user{
@@ -152,6 +160,7 @@ class userwithid extends user{
             $this->email = $row['email'];
             $this->phone = $row['phone'];
             $this->username = $row['username'];
+            $this->dp = $row['dp'];
             $this->permissions = $row['permissions'];
         } else die ("Fatal user collision");
         mysqli_close($con);
@@ -166,6 +175,7 @@ class userwithname extends user{
             $this->email = $row['email'];
             $this->phone = $row['phone'];
             $this->username = $row['username'];
+            $this->dp = $row['dp'];
             $this->permissions = $row['permissions'];
         } else die("Fatal user collision");
         mysqli_close($con);

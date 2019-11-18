@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2019 at 06:34 AM
+-- Generation Time: Nov 18, 2019 at 03:42 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -38,7 +38,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`uid`, `password`) VALUES
-(1, 'jitinjitin');
+(1, 'jitinjitin'),
+(2, 'jeenajeena');
 
 -- --------------------------------------------------------
 
@@ -59,14 +60,6 @@ CREATE TABLE `require` (
   `status` int(5) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `require`
---
-
-INSERT INTO `require` (`id`, `uid`, `tags`, `name`, `details`, `number`, `units`, `location`, `expiry`, `status`) VALUES
-(1, 1, 'some more shit', 'shit', 'it\'s really smelly', 2, 'piece', 'closet', '2019-11-15 00:32:00', 1),
-(2, 1, 'mangaa', 'mangappazhama', 'pazhuthath mathi', 1, 'kashnam', 'marathinte moottil', '2019-11-22 02:21:00', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -86,13 +79,6 @@ CREATE TABLE `supply` (
   `status` int(5) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `supply`
---
-
-INSERT INTO `supply` (`id`, `uid`, `tags`, `name`, `details`, `number`, `units`, `location`, `expiry`, `status`) VALUES
-(1, 1, 'some shit', 'shit', 'it\'s smelly', 2, 'pieces', 'closet', '2019-11-13 14:03:00', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -104,6 +90,7 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `username` varchar(50) NOT NULL,
+  `dp` varchar(50) NOT NULL DEFAULT 'source/dp.jpg',
   `permissions` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -111,8 +98,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `phone`, `username`, `permissions`) VALUES
-(1, 'jitinjg@gmail.com', '8943432840', 'jitin', 0);
+INSERT INTO `user` (`id`, `email`, `phone`, `username`, `dp`, `permissions`) VALUES
+(1, 'jitin@gmail.com', '8943432729', 'Jitinjg', 'dp/IMG_20160421_00322920191117195840.jpg', 0),
+(2, 'jeena@gmail.com', '9843949323', 'jeena', 'source/dp.jpg', 0);
 
 --
 -- Indexes for dumped tables
@@ -150,19 +138,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `require`
 --
 ALTER TABLE `require`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `supply`
 --
 ALTER TABLE `supply`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

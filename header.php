@@ -1,9 +1,13 @@
     <header class="head shad">
         <div class="container">
-            <div class="col-sm-6">
-                <a href="profile.php" class="right"><?php echo $_SESSION['username']; ?> <div class="headdp"><img src="source\dp.jpg" class="responsive"></div></a>
-                <a href="signout.php" class="right">Signout</a>
-            </div>
+            <nav class="col-sm-6">
+                <a href="" class="right"><?php echo $_SESSION['username']; ?> <div class="headdp"><img src="<?php echo (new userwithname($_SESSION['username']))->dp; ?>" class="responsive"></div></a>
+                <ul>
+<!--                    <li><a href="messages.php">Messages</a></li>-->
+                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="signout.php">Sign Out</a></li>
+                </ul>
+            </nav>
             <div class="col-sm-6">
                 <a href="home.php" class="left">S.A.R.M</a> 
             </div>

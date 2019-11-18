@@ -68,7 +68,6 @@ function valnumber(element){
     checklights();
 }
 function valunits(element){
-    console.log(element.value);
     if (element.value!=""){
         lights.units=1;
         element.classList.remove("val-true");

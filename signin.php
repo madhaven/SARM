@@ -32,24 +32,25 @@ if (isset($_POST['submit'])){
         }
         function valusername(){
 			var username = document.getElementById('username').value;
-			var ajax = new XMLHttpRequest();
-			ajax.onreadystatechange = function(){
-				if (this.readyState == 4 && this.status == 200){
-					var uname = document.getElementById('username');
-					if (this.response == "TRUE"){
-						uname.classList.remove("val-true");
-						uname.title="";
-						greenlight[0]=1;
-					} else {
-						uname.classList.add("val-true");
-						uname.title = "Username don't exist";
-						greenlight[0]=0;
-					}
-					islightgreen();
-				}
-			}
-			ajax.open("GET", "checkusers.php?username="+username, true);
-			ajax.send();
+            if (!username) return;
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    var uname = document.getElementById('username');
+                    if (this.response == "TRUE"){
+                        uname.classList.remove("val-true");
+                        uname.title="";
+                        greenlight[0]=1;
+                    } else {
+                        uname.classList.add("val-true");
+                        uname.title = "Username don't exist";
+                        greenlight[0]=0;
+                    }
+                    islightgreen();
+                }
+            }
+            ajax.open("GET", "checkusers.php?username="+username, true);
+            ajax.send();
         }
         function valpassword(){
             element = document.getElementById('password');

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('tables.php');
 $noresults = "";
 if (isset($_GET['search'])){
@@ -11,9 +12,9 @@ if (isset($_GET['search'])){
     foreach($words as $x){
         if ($query) $query = $query." union ";
         if ($_GET['code'] == 1)
-            $query = $query."select * from supply where `supply`.tags like '%$x%' and status=1";
+            $query = $query."select * from supply where uid!=${_SESSION['id']} and ((`supply`.tags like '%$x%' and status=1) or ((select username from user where id = uid) like '%$x%'))";
         elseif ($_GET['code'] == 2)
-            $query = $query."select * from `require` where `require`.tags like '%$x%' and status=1";
+            $query = $query."select * from `require` where uid!=${_SESSION['id']} and ((`require`.tags like '%$x%' and status=1) or ((select username from user where id = uid) like '%$x%'))";
     }
     $con = connect();
     $res = mysqli_query($con, $query);

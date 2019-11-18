@@ -50,27 +50,33 @@ if (isset($_POST['submit'])){
         }
         islightgreen();
     }
-    function valUsername(){ //requires AJAX
-        var username = document.getElementById('username').value;
-        var ajax = new XMLHttpRequest();
-        ajax.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200){
-                var uname = document.getElementById('username');
-                if (this.response == "TRUE"){
-                    uname.classList.add("val-true");
-                    uname.title = "Username already exists.";
-                    greenlight.username=0;
-                } else {
-                    uname.classList.remove("val-true");
-                    uname.title="";
-                    greenlight.username=1;
+    function valUsername(){
+        var username = document.getElementById('username');
+        if (username.value){
+            username.value = username.value.replace(' ', '');
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200){
+                    console.log(this);
+                    if (this.response == "TRUE"){
+                        username.classList.add("val-true");
+                        username.title = "Username already exists.";
+                        greenlight.username=0;
+                    } else {
+                        username.classList.remove("val-true");
+                        username.title="";
+                        greenlight.username=1;
+                    }
+                    islightgreen();
                 }
-                console.log("ehcking for logs");
-                islightgreen();
             }
+            ajax.open("GET", "checkusers.php?username="+username.value, true);
+            ajax.send();
+            islightgreen();
+            return;
         }
-        ajax.open("GET", "checkusers.php?username="+username, true);
-        ajax.send();
+        username.classList.add("val-true");
+        greenlight.username=0;
     }
     function valPass(){
         var element = document.getElementById("password");
@@ -127,12 +133,12 @@ if (isset($_POST['submit'])){
                 <div class="signinpanel shad">
                     <h3 class="signinheadmarg">SARM | Sign Up</h3>
                     <form action="signup.php" method="post">
-                        <div class="form-group"><input name="email" type="email" class="form-control validate" placeholder="Email address" oninput="valEmail();" id="email"></div>
-                        <div class="form-group"><input name="phone" type="number" min="1000000000" max="9999999999" class="form-control validate" placeholder="Contact Number" oninput="valPhone();" id="phone"></div>
-                        <div class="form-group"><input name="username" type="text" class="form-control validate" placeholder="Username" oninput="valUsername();" id="username"></div>
-                        <div class="form-group"><input name="password" type="password" class="form-control validate" placeholder="Password" oninput="valPass();" id="password"></div>
-                        <div class="form-group"><input type="password" class="form-control validate" placeholder="Confirm Password" oninput="valConfirm();" id="pass2"></div>
-                        <div class="form-group"><input name="submit" type="submit" id="submit" class="form-control validate" disabled></div>
+                        <div class="form-group"><input name="email" type="email" class="form-control" placeholder="Email address" oninput="valEmail();" id="email"></div>
+                        <div class="form-group"><input name="phone" type="number" min="1000000000" max="9999999999" class="form-control" placeholder="Contact Number" oninput="valPhone();" id="phone"></div>
+                        <div class="form-group"><input name="username" type="text" class="form-control" placeholder="Username" oninput="valUsername();" id="username"></div>
+                        <div class="form-group"><input name="password" type="password" class="form-control" placeholder="Password" oninput="valPass();valConfirm();" id="password"></div>
+                        <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" oninput="valConfirm();" id="pass2"></div>
+                        <div class="form-group"><input name="submit" type="submit" id="submit" class="form-control" disabled></div>
                     </form>
                     <p>Already registered on S.A.R.M ?<br><a href="signin.php">Sign in Here</a></p>
                 </div>

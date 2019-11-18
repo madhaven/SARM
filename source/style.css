@@ -36,6 +36,9 @@
 *:focus{
     box-shadow:none !important;
 }
+body{
+    background-color:var(--colbg);
+}
 a{
     color:var(--colshadow);
 }
@@ -52,7 +55,7 @@ a:hover{
     position:fixed;
     z-index: -10;
     transition:none;
-    overflow: auto;
+    overflow: hidden;
 }
 .homemain{
     padding-top:2em;
@@ -106,6 +109,12 @@ a:hover{
     min-height: height:100vh;
     overflow:scroll;
 }
+.searchresult input{
+    bottom:1em;
+    border-radius: 4px;
+    position:absolute;
+    width:94%;
+}
 .result{
     margin-top:2em;
     padding:1.75em;
@@ -113,8 +122,41 @@ a:hover{
     border:1px solid var(--colinputhover);
     transition:0.25s ease-out;
 }
+.chat2.result, .chat.result{
+    margin-top:0.7em;
+    padding:0.5em;
+    display:flex;
+    align-items:center;
+    color:var(--colinputfocus);
+    max-width: 90%;
+}
+.chat.result{
+    padding:0.5em;
+    border: 1px solid transparent;
+    border-radius:4px;
+    color:var(--colinputhover);
+    width:100%;
+}
+.chat.result:hover, .chat.result:focus{
+    color:var(--colinputfocus);
+    cursor:pointer;
+}
+.chat.result:first-child, .chat2.result:first-child{
+    margin-top:2em;
+}
+.chat.result>img{
+    height:3em;
+    width:3em;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius:50%;
+    margin-right:1em;
+}
 .result:hover, .result:focus, .result:focus-within{
     border: 1px solid var(--colinputfocus);
+}
+.chat2:hover, .chat2:focus, .chat2:focus-within{
+    border:1px solid var(--colinputhover);
 }
 .form-control:hover{
     border:1px solid var(--colinputhover);
@@ -127,11 +169,11 @@ input{
     color: var(--colinputfocus);
     font-weight: 800;
 }
-.form-control:focus, .form-control:active, input[type=submit]:hover{
+.form-control:focus, .form-control:active, input[type=submit]:hover, input[type=button]:hover{
     border: 1px solid var(--colinputfocus);
     color: var(--colinputfocus);
 }
-input[type=submit]:hover{
+input[type=submit]:hover, input[type=button]{
     background-color:var(--coltop);
 }
 header.head{
@@ -151,6 +193,32 @@ header.head>div{
 header.head a{
     padding:1em;
     font-weight: 600;
+}
+header.head li{
+    margin:5px;
+    padding:1em;
+    border-radius:0.5em;
+    border: 1px solid transparent;
+    background-color:var(--coltop);
+    text-align:center;
+    box-shadow:0 0 8px 0 rgba(0,0,0,0.5);
+}
+header.head li:hover, header.head li:focus{
+    border:1px solid black;
+}
+header.head nav>ul{
+    display:block;
+    position:absolute;
+    top:0;
+    right:0;
+    padding:0;
+    margin:0;
+    margin-top:4em;
+    list-style-type:none;
+    visibility:hidden;
+    }
+header.head nav:hover>ul, header.head nav:focus>ul{
+    visibility:visible;
 }
 .right{
   float:right;
@@ -239,6 +307,10 @@ tr{
     border-radius:50%;
     overflow:hidden;
 }
+.profilepagedp img{
+    max-width:100%;
+    max-width: 100%;
+}
 .headdp{
     float:right;
     width:2em;
@@ -250,4 +322,7 @@ tr{
 .headdp img{
     max-width:100%;
     max-height:100%;
+}
+.profilehidden{
+    display:none;
 }

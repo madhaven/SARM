@@ -16,21 +16,23 @@ if (!isset($_POST['submit'])){
     <script>
         function fill(element){
             text = element.value;
+            if (text==""){
+                lights.tags=0;
+                checklights();
+                return;
+            } else lights.tags=1;
+            checklights();
             if (/\n/.test(text))
                 if (text[text.length-2]!=' ') element.value = text = text.replace(/\n/, ' ');
                 else element.value = text = text.replace(/\n/, '');
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function(){
                 if (this.readyState == 4 && this.status == 200){
-                    console.log(text);
-                    console.log(this.responseText);
                     document.getElementsByClassName("searchresult")[0].getElementsByTagName("div")[0].innerHTML = this.responseText;
                 }
             }
-            if (text){
-                ajax.open("GET", "getsupplies.php?code=1&search="+encodeURIComponent(text), true);
-                ajax.send();
-            }
+            ajax.open("GET", "getsupplies.php?code=1&search="+encodeURIComponent(text), true);
+            ajax.send();
         }
     </script>
 </head>
