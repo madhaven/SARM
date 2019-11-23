@@ -62,7 +62,7 @@ function valnumber(element){
         lights.number=1;
         element.classList.remove("val-true");
     } else {
-        lights.name=0;
+        lights.number=0;
         element.classList.add("val-true");
     }
     checklights();
@@ -82,7 +82,7 @@ function valdetails(element){
         lights.details=1;
         element.classList.remove("val-true");
     } else {
-        lights.name=0;
+        lights.details=0;
         element.classList.add("val-true");
     }
     checklights();

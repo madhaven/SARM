@@ -76,7 +76,6 @@ if (!isset($_POST['submit'])){
 </html>
 <?php
 } else {
-    $uid = $_SESSION['id'];
     $tags = $_POST['tags'];
     $name = $_POST['name'];
     $details = $_POST['details'];
@@ -84,7 +83,7 @@ if (!isset($_POST['submit'])){
     $units = $_POST['units'];
     if (isset($_POST['location'])) $loc = $_POST['location']; else $loc=NULL;
     $expiry = $_POST['time'];
-    (new supply($uid, $tags, $name, $details, $number, $units, $loc, $expiry, 1))->insertindb();
+    (new supply($_SESSION['user']->id, $tags, $name, $details, $number, $units, $loc, $expiry, 1))->insertindb();
     header('Location:home.php#supply');
 }
 ?>

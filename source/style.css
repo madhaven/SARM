@@ -36,6 +36,9 @@
 *:focus{
     box-shadow:none !important;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color:var(--colbg);
 }
@@ -48,14 +51,14 @@ a:hover{
 }
 .maindiv{
     width:100vw;
+    min-height: 100vh;
     height:100%;
     margin:0;
-    min-height: 100vh;
     background-color: var(--colbg);
     position:fixed;
     z-index: -10;
     transition:none;
-    overflow: hidden;
+    overflow: auto;
 }
 .homemain{
     padding-top:2em;
@@ -269,22 +272,29 @@ header.head nav:hover>ul, header.head nav:focus>ul{
   font-weight: 500;
   text-shadow:0 0 20px black;
 }
-h3{
+h3, .theh3{
   margin-top:2em;
 }
-tr{
-  cursor: pointer;
+.theh3 td:first-child{
+    cursor:pointer;
+}
+tr.th{
+    cursor: auto;
 }
 .table2{
   margin-bottom:5em;
 }
 .table tr, table tr td, table tr th{
-    border:1px solid transparent;!important;
+    border:1px solid transparent !important;
 }
 .table tr:hover, table tr:hover td, table tr:hover th{
     border-top: 1px solid var(--colinputfocus) !important;
     border-bottom: 1px solid var(--colinputfocus) !important;
     z-index:20;
+}
+td{
+    position:relative;
+    margin:auto;
 }
 /*
 .val-true::before{
@@ -325,4 +335,50 @@ tr{
 }
 .profilehidden{
     display:none;
+}
+.usersdp{
+    position:relative;
+    width:2em;
+    height:2em;
+    margin-right:1em;
+    border-radius:50%;
+}
+.adminbutton{
+    background-color:var(--colbg);
+    border:1px solid var(--colinputhover);
+    border-radius:5px 0 0 5px;
+/*    margin:0 1em 0 0;*/
+    padding:0 1em;
+    height:2em;
+    color:var(--colinputhover);
+    z-index: 10;
+}
+.adminbutton:hover, .adminbutton:focus{
+    border-color:transparent;
+    background-color:white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5);
+    transition:0.1s ease-out;
+    color:var(--colinputfocus);
+}
+.user{
+/*    margin:0 0 0 1em;*/
+    border-radius:0 5px 5px 0;
+}
+.usergreen{
+    background-color:#00ff0088;
+    border:1px solid var(--colinputhover);
+    border-radius:4px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    z-index: 10;
+    color:#050;
+}
+.userred{
+    background-color:#ff000088;
+    border:1px solid var(--colinputhover);
+    border-radius:4px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px; 
+    z-index: 10;
+    color:#500;
 }

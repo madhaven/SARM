@@ -1,15 +1,7 @@
 <?php
 require('tables.php');
 deletesession();
-if (isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    if ((new user($email, $phone, $username, 0))->insertindb($password))
-        $_POST['erroruser'] = true;
-    header('Location: signin.php');
-}
+if (!isset($_POST['submit'])){
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,4 +138,14 @@ if (isset($_POST['submit'])){
         </div>
     </div>
 </body>
-</html>
+</html><?php 
+} else {
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if ((new user($email, $phone, $username, 0))->insertindb($password))
+        $_POST['erroruser'] = true;
+    header('Location: signin.php');
+}
+?>

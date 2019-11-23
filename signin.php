@@ -1,13 +1,8 @@
 <?php
 require('tables.php');
 deletesession();
-if (isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $res = signin($username, $password);
-    if ($res)
-        header('Location: home.php');
-}
+if (!isset($_POST['submit']))
+{
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,4 +80,11 @@ if (isset($_POST['submit'])){
         </div>
     </div>
 </body>
-</html>
+</html><?php 
+} else {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $res = signin($username, $password);
+    if ($res)
+        header('Location: home.php');
+}

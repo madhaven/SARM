@@ -1,5 +1,5 @@
 <?php 
-require('tables.php');
+require_once('tables.php');
 checksession();
 ?><!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@ checksession();
         </div>
         <div class='container'>
 <?php
-$rows = (new userwithid($_SESSION['id']))->selectsupplyrows();
+$rows = $_SESSION['user']->selectsupplyrows();
 if ($rows){
 ?>
          <div class="col-md-6" style="float:left;">
@@ -43,7 +43,7 @@ if ($rows){
           </div>
 <?php
 }
-$rows = (new userwithid($_SESSION['id']))->selectrequirerows(true);
+$rows = $_SESSION['user']->selectrequirerows(true);
 if ($rows){
 ?>
          <div class="col-md-6" style="float:left;">

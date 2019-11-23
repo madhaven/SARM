@@ -15,8 +15,7 @@ function signin($username, $password){
         $res = mysqli_query($con, "select uid from login where uid=$id and password='$password'") or die("Cannot sign in");
         if (mysqli_num_rows($res)==1){
             session_start();
-            $_SESSION['username'] = $username;
-            $_SESSION['id'] = $id;
+            $_SESSION['user'] = new userwithid($id);
             return true;
         } else {
             mysqli_close($con);
@@ -29,17 +28,14 @@ function signin($username, $password){
 }
 function deletesession(){
     session_start();
-    if (isset($_SESSION['username'])){
-        //$_SESSION['id'] = NULL;
-        //$_SESSION['username'] = NULL;
-        unset($_SESSION['id']);
-        unset($_SESSION['username']);
+    if (isset($_SESSION['user'])){
+        unset($_SESSION['user']);
         session_destroy();
     }
 }
 function checksession(){
     session_start();
-    if (!isset($_SESSION['username'])){
+    if (!isset($_SESSION['user'])){
         header('Location: signin.php');
     }
 }
@@ -115,9 +111,9 @@ class user{
     function selectsupplyrows($req = false){
         $con = connect();
         if ($req)
-            $res = mysqli_query($con, "select id from `require` where uid = ${_SESSION['id']};") or die ("Unable to fetch reequire data");
+            $res = mysqli_query($con, "select id from `require` where uid = {$_SESSION['user']->id};") or die ("Unable to fetch reequire data");
         else
-            $res = mysqli_query($con, "select id from `supply` where uid = ${_SESSION['id']};") or die ("Unable to fetch supply data");
+            $res = mysqli_query($con, "select id from `supply` where uid = {$_SESSION['user']->id};") or die ("Unable to fetch supply data");
             
         mysqli_close($con);
         if (mysqli_num_rows($res)>0){
@@ -154,14 +150,16 @@ class user{
 class userwithid extends user{
     function __construct($uid){
         $con = connect();
-        $res = mysqli_query($con, "select * from user where id = $uid;") or die("Unable to fetch user data");
+        $res = mysqli_query($con, "select * from user where id = $uid;") or die("Unable to fetch userid data");
         if (mysqli_num_rows($res)==1){
             $row = mysqli_fetch_array($res);
+            $this->id = $uid;
             $this->email = $row['email'];
             $this->phone = $row['phone'];
             $this->username = $row['username'];
             $this->dp = $row['dp'];
             $this->permissions = $row['permissions'];
+            $this->authorizedby = $row['authorizedby'];
         } else die ("Fatal user collision");
         mysqli_close($con);
     }
@@ -169,7 +167,7 @@ class userwithid extends user{
 class userwithname extends user{
     function __construct($username){
         $con = connect();
-        $res = mysqli_query($con, "select * from user where username = '$username';") or die("Unable to fetch user data");
+        $res = mysqli_query($con, "select * from user where username = '$username';") or die("Unable to fetch username data");
         if (mysqli_num_rows($res)==1){
             $row = mysqli_fetch_array($res);
             $this->email = $row['email'];
@@ -177,6 +175,7 @@ class userwithname extends user{
             $this->username = $row['username'];
             $this->dp = $row['dp'];
             $this->permissions = $row['permissions'];
+            $this->authorizedby = $row['authorizedby'];
         } else die("Fatal user collision");
         mysqli_close($con);
     }

@@ -1,7 +1,7 @@
 <?php
 require('tables.php');
 checksession();
-$user = new userwithname($_SESSION['username']);
+$user = $_SESSION['user'];
 if(!isset($_POST['submit'])){
     if (isset($_GET['username']))
         $user_x = new userwithname($_GET['username']);
@@ -145,7 +145,7 @@ else echo "window.location.href='messages.php?user=".$_GET['username']."'";?>"><
         $filename = "dp/".$filename[0].date("YmdHis").".".$filename[1];
     } else $filename = $user->dp;
     move_uploaded_file($_FILES['dp']['tmp_name'], $filename);
-    $user->updateas(new user($email, $phone, $username, $filename)) or die("SCENE");
-    $_SESSION['username'] = $username;
+    $user->updateas(new user($email, $phone, $username, $filename)) or die("USERSCENE");
+    $_SESSION['user'] = $user;
     header('location: profile.php');
 }
